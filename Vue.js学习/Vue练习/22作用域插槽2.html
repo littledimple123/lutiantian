@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>作用域插槽</title>
+<script src="js/vue.js"></script>
+
+</head>
+<body>
+
+<div id="example">
+ 	<my-stripe-list v-bind:items="users" odd-bgcolor="#d3dce6" even-bgcolor="#e5e9f2">
+		<template slot="cont" scope='props'>
+		 <!-- props对象接收来自子组件slot的$index参数 -->
+			<span>{{users[props.$index].id}}</span>
+			<span>{{users[props.$index].name}}</span>
+			<span>{{users[props.$index].age}}</span>
+			<a :href="'#edit/id/'+users[props.$index].id" rel="external nofollow" >编辑</a>
+          <a :href="'#del/id/'+users[props.$index].id" rel="external nofollow" >删除</a>
+		</template>
+	</my-stripe-list>
+	
+</div>
+	
+<script>
+	//子组件
+	Vue.component("my-stripe-list",{
+		template:`
+			<div>
+				<div v-for="(item,index) in items" style='line-height:2.2;' v-bind:style="index % 2===0?'background:'+oddBgcolor:'background:'+evenBgcolor">
+					<slot name='cont' v-bind:$index="index"></slot>
+				</div>
+			</div>
+		`,
+		props:{
+			items:Array,
+			oddBgcolor:String,
+			evenBgcolor:String
+		}
+	})
+	new Vue({
+		el:"#example",
+		data:{
+			users:[
+				{id:1,name:"张三",age:25},
+				{id:2,name:"李四",age:26},
+				{id:3,name:"王五",age:27},
+				{id:4,name:"赵六",age:28},
+				{id:5,name:"孙七",age:29}
+			]
+		}
+	}) 
+</script>
+</body>
+</html>

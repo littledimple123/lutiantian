@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>具名插槽</title>
+<script src="js/vue.js"></script>
+
+</head>
+<body>
+
+<div id="example">
+ 	<parent-com></parent-com>
+</div>
+
+<script>
+	//子组件
+	Vue.component('app-layout',{
+		template:`
+			<div>
+				<slot name='header'></slot>
+				<slot></slot>
+				<slot name='footer'></slot>
+			</div>
+		`,
+	});
+	//父组件
+	Vue.component('parent-com',{
+		template:`
+			<app-layout>
+				<h1 solt='header'>这是一个页面的标题</h1>
+				<h2>这是内容页之一</h2>
+				<h2>这是内容页之二</h2>
+				<h3 solt='footer'>这是一个页面的页脚</h3>
+			</app-layout>
+		`,
+	})
+	new Vue({
+		el:"#example"
+	})
+</script>
+</body>
+</html>

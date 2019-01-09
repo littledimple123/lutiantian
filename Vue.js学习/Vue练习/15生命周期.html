@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">{{test}}</div>
+  
+<script>
+    var vue=new Vue({
+      el:"#app",
+      data:{
+        test:"111"
+      },
+      beforeCreate:function(){
+        console.log(this);
+        showMes('创建vue实例前',this);
+      },
+      create:function(){
+        console.log(this);
+        showMes('创建vue实例后',this);
+      },
+      beforeMount:function(){
+        showMes('挂载到dom前',this);
+      },
+      mounted:function(){
+        showMes('挂载到dom后',this)
+      },
+      beforeUpdate:function(){
+        showMes('数据变化更新前',this)
+      },
+      updated:function(){
+        showMes("数据变化更新后",this)
+      },
+      beforeDestroy:function(){
+        vue.test="333变化了";
+        showMes("vue实例销毁前",this);
+      },
+      destroyed:function(){
+        showMes("vue实例销毁后",this)
+      },
+    })
+    function realDom(){
+      console.log('真实dom结构：' + document.getElementById('app').innerHTML);
+    }
+    function showMes(process,obj){
+      console.log(process);
+      console.dir(obj);
+      realDom();
+      console.log('-------------');
+
+    }
+</script>
+	
+
+</body>
+</html>

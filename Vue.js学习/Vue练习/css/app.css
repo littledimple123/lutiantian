@@ -1,0 +1,23 @@
+#bag{
+	width: 200px;
+	height: 100px;
+	margin:0 auto;
+	background: url('../img/1.png') center no-repeat;
+}
+#bag.burst{
+	background: url('../img/2.png') center no-repeat;
+}
+#bag-health{
+	width: 200px;
+	margin:0 auto 20px auto;
+	border:2px solid #000;
+}
+#bag-health div{
+	height: 20px;
+	background: #f00;
+}
+#control{
+	width:200px;
+	margin:0 auto;
+	text-align: center;
+}

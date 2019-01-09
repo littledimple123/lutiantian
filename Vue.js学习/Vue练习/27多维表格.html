@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>列表的排序过渡</title>
+<script src="js/vue.js"></script>
+<script src='js/lodash.min.js'></script>
+<style>
+   button{
+            width: 100px;
+            height: 30px;
+            border: 1px solid #666666;
+            border-radius: 5px;
+            background: rgba(195, 197, 221, 0.36);
+            margin: 10px;
+        }
+        button:active, button:hover {
+            box-shadow: 2px 3px 2px #999 inset;
+            border: 1.5px solid rgba(195, 197, 221, 0.57);
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap; /*flex容器为多行。该情况下flex子项溢出的部分会被放置到新行，子项内部会发生断行*/
+            width: 238px;
+        }
+        .cell {
+            display: flex;
+            justify-content: space-around; /*在弹性盒对象的 <div> 元素中的各项周围留有空白,用于设置或检索弹性盒子元素在主轴（横轴）方向上的对齐方式*/
+            align-items: center;/*居中对齐弹性盒的各项 <div> 元*/
+            width: 25px;
+            height: 25px;
+            border: 1px solid #aaa;
+            margin-right: -1px;
+            margin-bottom: -1px;
+        }
+        .cell:nth-child(3n) {
+            margin-right: 0;
+        }
+        .cell:nth-child(27n) {
+            margin-bottom: 0;
+        }
+        .cells-move {
+            transition: transform 1s;
+        }
+</style>
+</head>
+<body>
+<div id="demo">
+        <button @click="shuffle">Shuffle</button>
+        <transition-group name="cells" tag="div" class="container">
+            <div v-for="cell in cells" :key="cell.id" class="cell">
+                {{ cell.number }}
+            </div>
+        </transition-group>
+    </div>
+<script>
+   new Vue({
+            el : "#demo",
+            data: {
+                cells: Array.apply(null, {length : 81}).map(function(_, index) {
+                    return {
+                        id: index,
+                        number : index % 9 + 1
+                    }
+                })
+            },
+            methods : {
+                shuffle: function() {
+                    this.cells = _.shuffle(this.cells);
+                }
+            }
+        })
+</script>
+</body>
+</html>

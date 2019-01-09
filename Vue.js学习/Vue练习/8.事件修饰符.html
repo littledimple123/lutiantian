@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h2>v-on.once</h2>
+  <button type="button" @click.once="once_click">Button</button>
+  <hr />
+</div>
+ 
+<script>
+new Vue({
+  el:"#app",
+  methods: {
+    once_click: function () {
+      console.log("enter click...");
+    }
+  }
+
+})
+</script>
+	
+
+</body>
+</html>

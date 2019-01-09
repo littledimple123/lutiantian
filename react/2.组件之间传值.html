@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>组件之间传值</title>
+	<script src="https://cdn.bootcss.com/react/16.4.0/umd/react.development.js"></script>
+	<script src="https://cdn.bootcss.com/react-dom/16.4.0/umd/react-dom.development.js"></script>
+	 <script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script> 
+	<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script> 
+	
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		//父组件
+		var Mycontainer=React.createClass({
+			getInitialState:function(){
+				return {
+					checked:true
+				};
+			},
+			render:function(){
+				return(
+					<ToggleButton text='Toggle me' checked={this.state.checked} />
+				);
+			}
+		});
+		var ToggleButton=React.createClass({
+			render:function(){
+				var checked=this.props.checked;
+				var text=this.props.text;
+				return(
+					<label>{text}:<input type='checkbox' checked={checked}/>1111</label>
+				)	
+			}
+		})
+		ReactDOM.render(<Mycontainer/>,document.getElementById('root'))
+	</script>
+</body>
+</html>

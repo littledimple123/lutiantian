@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<script src="js/vue.js"></script>
+<style>
+	.class1{
+		color: #f00;
+	}
+</style>
+</head>
+<body>
+<div id="app1">
+<!-- v-model这个指令只能用在<input>, <select>,<textarea>这些表单元素上 -->
+  <h3>多选绑定一个数组</h3>
+  <label for="r1">张三</label>
+  <input type="checkbox" v-model="checkname" id="r1" value='张三'>
+  <label for="r11">李四</label>
+  <input type="checkbox" v-model="checkname" id="r11" value='李四'>   
+  <br><br>
+  <div>
+    选择的人选名字：{{checkname}}
+  </div>
+  <hr>
+  <h3>单选按钮绑定数据</h3>
+    <input type="radio" value="男" v-model="sex">男
+    <input type="radio" value="女" v-model="sex">女
+    <p>选择的人选的性别是：{{sex}}</p>
+</div>
+
+
+<script>
+
+var amm=new Vue({
+	el: '#app1',	
+  data:{
+     // 多选框checkname一个空的数组 ,不可以是空字符串和空对象，单选框sex可以是空数组，空字符串，空对象
+  	checkname: [],
+    sex:''
+  }
+});
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <div v-for="val in object">{{val}}</div>
+  <hr>
+  <div v-for="(val,key) in object">{{key}}:{{val}}</div>
+  <hr>
+   <div v-for="(val,key,index) in object">{{index}},{{key}}:{{val}}</div>
+   <hr>
+   <div v-for="person in persons">name:{{person.name}},age:{{person.age}}</div>
+   <div v-for="person in persons" v-if="person.age >= 23">{{person.name}}</div>
+   <!-- 1.key/index 都是可选参数
+   2.在迭代属性输出的之前，v-for会对属性进行升序排序输出
+   3.可以遍历数组，整数
+   4.可以同时添加v-if指令，v-for优先级更高， -->
+</div>
+ 
+<script>
+   var vm=new Vue({
+    el:"#app",
+    data:{
+      object:{
+        name:"百度",
+        link:"http://www.baidu.com",
+        slogn:"百度一下，你就知道！"
+      },
+      persons: [
+        {
+          name: 'Dale',
+          age: 22
+        }, 
+        {
+          name: 'Tim',
+          age: 30
+        },
+        {
+          name: 'Rex',
+          age: 23
+        }
+      ]
+    }
+   }) 
+</script>
+	
+
+</body>
+</html>

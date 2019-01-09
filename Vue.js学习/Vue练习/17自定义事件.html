@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>$on&&$emit</title>
+<script src="js/vue.js"></script>
+
+</head>
+<body>
+<!-- 
+	1、使用 $on(eventName) 监听事件
+	2、使用 $emit(eventName, optionalPayload) 触发事件
+	3、 Vue 的事件系统与浏览器的 EventTarget API 有所不同。尽管它们运行起来类似，但是 $on 和 $emit 并不是addEventListener 和 dispatchEvent 的别名。
+	4、父组件可以在使用子组件的地方直接用 v-on 来监听子组件触发的事件
+	
+-->
+<div id="example">
+  <p>{{totle}}</p>
+  <button-counter v-on:increment="incrementTotal"></button-counter>
+</div>
+<!-- 如何使用载荷 (payload) 数据 -->
+<div id="app">
+	<p v-for="mes in mess">{{mes}}</p>
+	<message-example v-on:mes="handleMessage"></message-example>
+</div>
+
+<script>
+	Vue.component("button-counter",{
+		//不能用 $on 监听子组件释放的事件，而必须在模板里直接用 v-on 绑定
+		template:`
+			<button v-on:click="incrementCounter">{{couter}}</button>
+		`,
+		data:function(){
+			return {
+				couter:0
+			}
+		},
+		methods:{
+			incrementCounter:function(){
+				this.couter+=1;
+				//$emit触发父组件的事件
+				this.$emit('increment')
+			}
+		}
+	})
+	var one=new Vue({
+		el:"#example",
+		data:{
+			totle:0
+		},
+		methods:{
+			incrementTotal:function(){
+				this.totle+=1
+			}
+		}
+	})
+	//如何使用载荷 (payload) 数据
+	Vue.component("message-example",{
+		template:`
+			<div>
+				<input type="text" v-model="message"/>				
+				<button v-on:click="handleSentMessage">Sent</button>				
+			</div>
+		`,
+		data:function(){
+			return{
+				message:"",
+				
+			}
+		},
+		methods:{
+			handleSentMessage:function(){
+				this.$emit('mes',{
+					pmes:this.message
+				})
+			}
+		}
+	})
+
+	var two=new Vue({
+		el:"#app",
+		data:{
+			mess:[],
+			
+		},
+		methods:{
+			handleMessage:function(payload){
+				this.mess.push(payload.pmes)
+			}
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <p>原始字符串：{{message}}</p>
+   <p>computed计算后反转的字符串{{reversedMessage}}</p> 
+  <p>methods计算后反转的字符串{{reversedMessage2()}}</p>
+  <!-- 注意computed和methods二者的区别 -->
+  <hr>
+  <p>{{ site }}</p>
+</div>
+ 
+<script>
+//我们可以使用 methods 来替代 computed，效果上两个都是一样的，但是 computed 是基于它的依赖缓存，只有相关依赖发生改变时才会重新取值。而使用 methods ，在重新渲染的时候，函数总会重新调用执行函数。
+//可以说使用 computed 性能会更好，但是如果你不希望缓存，你可以使用 methods 属性。
+  var vm=new Vue({
+    el: '#app',
+    data: {
+      message: 'Runoob!',
+      name:'百度',
+      link:'http://www.baidu.com'
+    },
+    computed: {
+      // 计算属性的 getter
+      reversedMessage: function () {
+        // `this` 指向 vm 实例
+        return this.message.split('').reverse().join('')
+      },
+     
+      site:{
+         //getter
+        //执行getter 输出 百度 http://www.baidu.com
+        get:function(){
+          return this.name+" "+this.link
+        },
+        //setter
+        set:function(newValue){
+            var names=newValue.split(' ');
+            this.name=names[0];
+            this.link=names[names.length-1]
+        }
+      }
+    },
+    methods: {
+      reversedMessage2: function () {
+        return this.message.split('').reverse().join('')
+      }
+    }
+    })
+    //调用 setter， vm.name 和 vm.url 也会被对应更新
+    vm.site = '菜鸟教程 http://www.runoob.com';
+</script>
+	
+
+</body>
+</html>

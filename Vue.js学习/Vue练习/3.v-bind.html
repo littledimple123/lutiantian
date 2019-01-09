@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Hello World</title>
+<script src="js/vue.js"></script>
+<style>
+	.red{
+		color: #f00;
+	}
+</style>
+</head>
+<body>
+<div id="app">
+  <label for="r1">修改颜色</label><input type="checkbox" v-model="isred" id="r1">
+  <br><br>
+ <!--  HTML 属性中的值应使用 v-bind 指令。
+  以下实例判断 class1 的值，如果为 true 使用 class1 类的样式，否则不使用该类： -->
+  <div v-bind:class="{'red': isred}">
+  <!-- 大括号里面的键名是字符串，键值是布尔值 -->
+  aaaaaaaaaaaaaaaaaaaaaaaaa
+  </div>
+</div>
+	
+<script>
+new Vue({
+	el: '#app',	
+  data:{
+  	isred: false
+  }
+});
+
+</script>
+</body>
+</html>

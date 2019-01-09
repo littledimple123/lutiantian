@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>组件props动态传值</title>
+<script src="js/vue.js"></script>
+
+</head>
+<body>
+<div id="example">
+  <my-component message="hello" name="张三" age="18"></my-component>
+</div>
+<div id="app">
+	<input type="text" v-model="mymessage">
+	<project v-bind:message="mymessage"></project>
+</div>
+<script src="js/props.js"></script>
+</body>
+</html>
